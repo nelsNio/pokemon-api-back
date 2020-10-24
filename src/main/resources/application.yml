@@ -1,0 +1,21 @@
+server:
+  port: 9898
+resource:
+  pokemons: http://pokeapi.co/api/v2/pokemon/
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    password: a123
+    url: jdbc:postgresql://localhost/demo
+    username: postgres
+  jpa:
+    database: POSTGRESQL
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+    show-sql: true
