@@ -1,5 +1,7 @@
 package co.com.nelsNio.rest;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
@@ -20,7 +22,11 @@ public class PokemonRes {
 
     @Value("${resource.pokemons}")
     private String idResource;
+
     private final static Logger LOGGER = Logger.getLogger("co.com.nelsNio.rest.PokemonRes");
+
+    // this method is based on gson (see below) and is used to parse Strings to json objects
+    public static JsonParser jsonParser = new JsonParser();
 
     @Autowired
     private RestTemplate restTemplate;
@@ -34,7 +40,8 @@ public class PokemonRes {
         LOGGER.log(Level.INFO,resource);
         LOGGER.log(Level.INFO,"co.com.nelsNio.rest.PokemonRes.findAll");
         Unirest.setTimeouts(0, 0);
-        HttpResponse<JsonNode> response = Unirest.get(resource).asJson();
+        HttpResponse<String> response = Unirest.get(resource).asString();
+
         return response.getBody();
     }
 
@@ -49,7 +56,8 @@ public class PokemonRes {
         LOGGER.log(Level.INFO,"co.com.nelsNio.rest.PokemonRes.findById");
         Unirest.setTimeouts(0, 0);
 
-        HttpResponse<JsonNode> response = Unirest.get(idResource+String.valueOf(id)+"/").asJson();
+        HttpResponse<String> response = Unirest.get(idResource+String.valueOf(id)+"/").asString();
+
 
         return response.getBody();
 

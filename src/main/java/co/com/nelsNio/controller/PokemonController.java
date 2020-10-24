@@ -5,6 +5,8 @@ import co.com.nelsNio.rest.PokemonRes;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.query.Procedure;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +16,7 @@ import java.io.IOException;
 
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/pokemons/")
 public class PokemonController {
     @Autowired
     private PokemonRes  pokemonRes;
@@ -22,17 +24,17 @@ public class PokemonController {
     @Autowired
     private  ObjectMapper mapper;
 
+
     /**
      *
      * @param model
      * @return
      * @throws UnirestException
      */
-    @RequestMapping(value = "/pokemons/list/",method = RequestMethod.GET)
     @ResponseBody
+    @GetMapping( produces= MediaType.APPLICATION_JSON_VALUE)
     public String findAll(Model model) throws UnirestException {
-        System.out.println(pokemonRes.findAll().toString());
-        return pokemonRes.findAll().toString();
+        return  pokemonRes.findAll().toString();
     }
 
     /**
@@ -41,12 +43,10 @@ public class PokemonController {
      * @return
      * @throws UnirestException
      */
-    @RequestMapping(value = "/pokemons",method = RequestMethod.GET)
+    @GetMapping(value = "/{id}", produces= MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public String findById(@RequestParam(required = false)  String id) throws  UnirestException {
-        System.out.println(pokemonRes.findById(id));
-
-        return pokemonRes.findById(id).toString();
+    public String findById(@PathVariable(required = false)  String id) throws  UnirestException {
+        return  pokemonRes.findById(id).toString();
     }
 
     /**

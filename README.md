@@ -53,11 +53,11 @@ en este caso es la siguiente : ``https://pokemon-api-back.herokuapp.com/`
 1) Listar todos los pokemons :
 Metodo: **GET**
 ````
-https://pokemon-api-back.herokuapp.com/pokemons/list/
+https://pokemon-api-back.herokuapp.com/pokemons/
 ````
 2) Traer pokemon por ID :
 Metodo: **GET**
-Parametro : **id**
+Parametro : **id** Ej:12
 ````
-https://pokemon-api-back.herokuapp.com/pokemons/?id=12
+https://pokemon-api-back.herokuapp.com/pokemons/12/
 ````
